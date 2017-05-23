@@ -1,7 +1,7 @@
 package ar.edu.ort.t5.grp1.misgastosdiarios;
 
 public class Categoria {
-	private int id;
+	private long id;
 	private String descripcion;
 	
 	public Categoria(int id, String descripcion) {
@@ -15,11 +15,11 @@ public class Categoria {
 		this.descripcion = descripcion;
 	}
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public void setId(long l) {
+		this.id = l;
 	}
 	public String getDescripcion() {
 		return descripcion;
