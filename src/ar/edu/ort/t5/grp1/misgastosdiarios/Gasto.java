@@ -13,10 +13,6 @@ public class Gasto {
 	private String detalle;
 	private Date fecha;
 	
-	private void newGasto() {
-		new GastoData(context).add(this);
-	}
-	
 	public Gasto(int id, Categoria categoria, float importe, String detalle, Date fecha) {
 		this.id = id;
 		this.categoria = categoria;
@@ -81,13 +77,6 @@ public class Gasto {
 	}
 	public void setFecha(Date fecha) {
 		this.fecha = fecha;
-	}
-	private void guardar () {
-		new GastoData(context).update(this);
-	}
-	private void borrar () {
-		new GastoData(context).delete(this);
-	}
-	
+	}	
 	
 }
