@@ -1,5 +1,6 @@
 package ar.edu.ort.t5.grp1.data;
 
+import java.text.ParseException;
 import java.util.LinkedList;
 import java.util.List;
 import android.annotation.SuppressLint;
@@ -8,7 +9,10 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import ar.edu.ort.t5.grp1.data.CategoriaContract.CategoriaEntry;
+import ar.edu.ort.t5.grp1.data.GastoContract.GastoEntry;
 import ar.edu.ort.t5.grp1.misgastosdiarios.Categoria;
+import ar.edu.ort.t5.grp1.misgastosdiarios.Gasto;
+import ar.edu.ort.t5.grp1.misgastosdiarios.Reporte;
 
 @SuppressLint("SimpleDateFormat")
 public class CategoriaData {
@@ -110,6 +114,27 @@ public class CategoriaData {
 		db.delete(CategoriaEntry.TABLE_NAME, "id = ?", new String[] { String.valueOf(categoria.getId()) });
 		db.close();
 
+	}
+	
+	public List<Reporte> getReporte(int mes) throws IllegalArgumentException, ParseException {
+
+		List<Reporte> lista = new LinkedList<Reporte>();
+		SQLiteDatabase db = handler.getDb();
+		// Cursor cursor = db.rawQuery(query, null);
+		
+		String sql = "SELECT SUM(IMPORTE) SUMA FROM GASTO WHERE SUBSTR(GASTO.FECHA,5,2) = ?; ";
+		Cursor cursor = db.rawQuery(sql, new String[] { Integer.toString(mes) });
+		float suma = cursor.getFloat(cursor.getColumnIndexOrThrow("SUMA"));
+		
+		sql = "SELECT CATEGORIA._ID, CATEGORIA.DESCRIPCION, SUM(IMPORTE) IMPORTE, SUM(IMPORTE)*100/? FROM CATEGORIA INNER JOIN GASTO ON CATEGORIA._ID = GASTO.CATEGORIA_ID WHERE SUBSTR(GASTO.FECHA,5,2) = ? GROUP BY CATEGORIA._ID, CATEGORIA.DESCRIPCION; ";
+		db.rawQuery(sql, new String[] { Integer.toString(mes), Float.toString(suma) });
+		
+		while (cursor.moveToNext()) {
+			lista.add(new Reporte(get(cursor), cursor.getFloat(cursor.getColumnIndexOrThrow("IMPORTE")), cursor.getFloat(cursor.getColumnIndexOrThrow("PORCENTAJE"))));
+		}
+		cursor.close();
+		db.close();
+		return lista;
 	}
 
 }

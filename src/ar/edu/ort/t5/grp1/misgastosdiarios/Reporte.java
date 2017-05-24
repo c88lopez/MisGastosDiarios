@@ -15,20 +15,11 @@ public class Reporte {
 	public Categoria getCategoria() {
 		return categoria;
 	}
-	public void setCategoria(Categoria categoria) {
-		this.categoria = categoria;
-	}
 	public float getImporte() {
 		return importe;
 	}
-	public void setImporte(float importe) {
-		this.importe = importe;
-	}
 	public float getPorcentaje() {
 		return porcentaje;
-	}
-	public void setPorcentaje(float porcentaje) {
-		this.porcentaje = porcentaje;
 	}
 	
 	
