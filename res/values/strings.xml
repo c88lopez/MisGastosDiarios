@@ -6,5 +6,11 @@
     <string name="action_settings">Settings</string>
     <string name="nuevo">Nuevo</string>
     <string name="reportes">Reportes</string>
+    <string name="title_activity_reporte">Reporte</string>
+    <string name="seleccione_mes">Seleccione Mes</string>
+    <string name="seleccione_anio">Seleccione Año</string>
+    <string name="categoria">Categoria</string>
+    <string name="importe">Importe</string>
+    <string name="porcentaje">Porcentaje</string>
 
 </resources>
