@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/LinearLayout1"
+    android:layout_width="fill_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="left"
+    android:gravity="left" >
+
+    <TextView
+        android:id="@+id/tvListViewReporteCategoria"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.33"
+        android:text="Categoria" />
+
+    <TextView
+        android:id="@+id/tvListViewReporteImporte"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.28"
+        android:gravity="right"
+        android:text="Importe" />
+
+    <TextView
+        android:id="@+id/tvListViewReportePorcentaje"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.20"
+        android:gravity="right"
+        android:text="0%" />
+
+</LinearLayout>
