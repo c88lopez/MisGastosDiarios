@@ -1,5 +1,7 @@
 package ar.edu.ort.t5.grp1.misgastosdiarios;
 
+import java.util.List;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,9 +11,9 @@ import android.widget.TextView;
 
 public class AdapterCustomGasto extends ArrayAdapter<Gasto> {
 
-	private Gasto[] datos;
+	private List<Gasto> datos;
 	
-	public AdapterCustomGasto(Context context, Gasto[] datos) {
+	public AdapterCustomGasto(Context context, List<Gasto> datos) {
 		super(context,R.layout.listview_gasto, datos);
 		this.datos = datos;
 	}
