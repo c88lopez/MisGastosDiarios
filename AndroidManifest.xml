@@ -26,6 +26,10 @@
             android:name=".ReporteActivity"
             android:label="@string/title_activity_reporte" >
         </activity>
+        <activity
+            android:name=".GastosActivity"
+            android:label="@string/title_activity_gastos" >
+        </activity>
     </application>
 
 </manifest>

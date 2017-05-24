@@ -12,5 +12,9 @@
     <string name="categoria">Categoria</string>
     <string name="importe">Importe</string>
     <string name="porcentaje">Porcentaje</string>
+    <string name="title_activity_gastos">Gastos</string>
+    <string name="administrar">Administrar</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="aceptar">Aceptar</string>
 
 </resources>

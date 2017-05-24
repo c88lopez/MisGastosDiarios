@@ -1,0 +1,78 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/LinearLayout1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="ar.edu.ort.t5.grp1.misgastosdiarios.GastosActivity" >
+
+    <GridLayout
+        android:id="@+id/GridLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:columnCount="2"
+        android:orientation="horizontal"
+        android:rowOrderPreserved="true" >
+
+        <LinearLayout
+            android:layout_gravity="fill_vertical"
+            android:orientation="vertical" >
+
+            <Spinner
+                android:id="@+id/spnGastosActivityCategoria"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:id="@+id/etGastosActivityImporte"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10" >
+
+                <requestFocus />
+            </EditText>
+
+            <EditText
+                android:id="@+id/etGastosActivityDescripcion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="numberDecimal" />
+        </LinearLayout>
+
+        <Space
+            android:layout_column="1"
+            android:layout_gravity="fill_horizontal"
+            android:layout_row="1" />
+    </GridLayout>
+
+    <Button
+        android:id="@+id/btnGastosActivityABMCategorias"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/administrar" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center" >
+
+        <Button
+            android:id="@+id/btnGastosActivityAceptar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/aceptar" />
+
+        <Button
+            android:id="@+id/btnGastosActivityCancelar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/cancelar" />
+
+    </LinearLayout>
+
+</LinearLayout>
