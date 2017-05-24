@@ -1,5 +1,7 @@
 package ar.edu.ort.t5.grp1.misgastosdiarios;
 
+import java.util.List;
+
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,9 +12,9 @@ import android.widget.TextView;
 
 public class AdapterCustomReporte extends ArrayAdapter<Reporte> {
 
-	private Reporte[] datos;
+	private List<Reporte> datos;
 	
-	public AdapterCustomReporte(Context context, Reporte[] datos) {
+	public AdapterCustomReporte(Context context, List<Reporte> datos) {
 		super(context,R.layout.listview_gasto, datos);
 		this.datos = datos;
 	}
@@ -24,19 +26,19 @@ public class AdapterCustomReporte extends ArrayAdapter<Reporte> {
 		LayoutInflater inflater = LayoutInflater.from(getContext());
 		
 		//Creo una vista a partir de un layout.
-		View item = null;// inflater.inflate(R.layout.listview_reporte, parent, false);
-		/*
-		Log.v(MainActivity.TAG,"Inflo!");
+		View item = inflater.inflate(R.layout.listview_reporte, parent, false);
 		
-		TextView tvImporte = (TextView)item.findViewById(R.id.tvImporte);
-		TextView tvCategoria = (TextView)item.findViewById(R.id.tvCategoria);
-		TextView tvPorcentaje = (TextView)item.findViewById(R.id.tvPorcentaje);
-		Log.v(MainActivity.TAG,"FindByID!");
+		//Log.v(MainActivity.TAG,"Inflo!");
+		
+		TextView tvImporte = (TextView)item.findViewById(R.id.tvListViewReporteImporte);
+		TextView tvCategoria = (TextView)item.findViewById(R.id.tvListViewReporteCategoria);
+		TextView tvPorcentaje = (TextView)item.findViewById(R.id.tvListViewReportePorcentaje);
+		//Log.v(MainActivity.TAG,"FindByID!");
 
-		tvImporte.setText(datos[position].getImporte());
-		tvCategoria.setText(datos[position].getCategoria());
-		tvPorcentaje.setText(datos[position].getPorcentaje());
-		*/
+		tvImporte.setText(String.valueOf(datos.get(position).getImporte()));
+		tvCategoria.setText(datos.get(position).getCategoria().getDescripcion());
+		tvPorcentaje.setText(String.valueOf(datos.get(position).getPorcentaje()));
+		
 		
 		//Devuelvo la vista para que el adaptador la agregue a la lista.
 		return item;

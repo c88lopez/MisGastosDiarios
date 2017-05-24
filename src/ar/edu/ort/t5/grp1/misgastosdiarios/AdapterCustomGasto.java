@@ -26,20 +26,19 @@ public class AdapterCustomGasto extends ArrayAdapter<Gasto> {
 		
 		//Creo una vista a partir de un layout.
 		View item = inflater.inflate(R.layout.listview_gasto, parent,false);
-		/*
-		Log.v(MainActivity.TAG,"Inflo!");
 		
-		TextView tvImporte = (TextView)item.findViewById(R.id.tvImporte);
-		TextView tvCategoria = (TextView)item.findViewById(R.id.tvCategoria);
-		TextView tvDetalle = (TextView)item.findViewById(R.id.tvDetalle);
-		TextView tvfecha = (TextView)item.findViewById(R.id.tvfecha);
-		Log.v(MainActivity.TAG,"FindByID!");
+		//Log.v(MainActivity.TAG,"Inflo!");
+		
+		TextView tvImporte = (TextView)item.findViewById(R.id.tvListViewGastoImporte);
+		TextView tvCategoria = (TextView)item.findViewById(R.id.tvListViewGastoCategoria);
+		TextView tvDetalle = (TextView)item.findViewById(R.id.tvListViewGastoDetalle);
+		TextView tvfecha = (TextView)item.findViewById(R.id.tvListViewGastoFecha);
+		//Log.v(MainActivity.TAG,"FindByID!");
 
-		tvImporte.setText(datos[position].getImporte());
-		tvCategoria.setText(datos[position].getCategoria());
-		tvDetalle.setText(datos[position].getDetalle());
-		tvfecha.setText(datos[position].getFecha());
-		*/
+		tvImporte.setText(String.valueOf(datos.get(position).getImporte()));
+		tvCategoria.setText(datos.get(position).getCategoria().getDescripcion());
+		tvDetalle.setText(datos.get(position).getDetalle());
+		tvfecha.setText(String.valueOf(datos.get(position).getFecha()));
 		
 		//Devuelvo la vista para que el adaptador la agregue a la lista.
 		return item;
