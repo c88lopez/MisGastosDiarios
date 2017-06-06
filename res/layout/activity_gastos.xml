@@ -54,6 +54,7 @@
         android:id="@+id/btnGastosActivityABMCategorias"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:onClick="btnGastosActivityAdministrarOnClick"
         android:text="@string/administrar" />
 
     <LinearLayout
@@ -65,12 +66,14 @@
             android:id="@+id/btnGastosActivityAceptar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="btnGastosActivityGuardarGastoOnClick"
             android:text="@string/aceptar" />
 
         <Button
             android:id="@+id/btnGastosActivityCancelar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="btnGastosActivityCancelarOnClick"
             android:text="@string/cancelar" />
 
     </LinearLayout>

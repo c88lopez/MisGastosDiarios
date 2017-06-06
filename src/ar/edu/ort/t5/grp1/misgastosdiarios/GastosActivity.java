@@ -1,9 +1,12 @@
 package ar.edu.ort.t5.grp1.misgastosdiarios;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
 
 public class GastosActivity extends Activity {
 
@@ -30,5 +33,24 @@ public class GastosActivity extends Activity {
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+	
+	public void btnGastosActivityAdministrarOnClick(View view){
+		Intent intent = new Intent(this,MainActivity.class);
+		startActivity(intent);
+	}
+	public void btnGastosActivityGuardarGastoOnClick(View view){
+		//try catch para guardar y en caso de todo ok se devuelve el toast y vuelve al principal
+		try{Toast toast1 = Toast.makeText(getApplicationContext(),"Se guardo exitosamente", Toast.LENGTH_SHORT);
+	    toast1.show();
+		Intent intent = new Intent(this,MainActivity.class);
+		startActivity(intent);
+		}catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+	}
+	public void btnGastosActivityCancelarOnClick(View view){
+		Intent intent = new Intent(this,MainActivity.class);
+		startActivity(intent);
 	}
 }
