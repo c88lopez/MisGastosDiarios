@@ -49,11 +49,11 @@ public class MainActivity extends Activity {
 		return super.onOptionsItemSelected(item);
 	}
 	
-/*	public void btnMainActivityNuevoGastoOnClick(View view){
-		Intent intent = new Intent(this,xxx.class);
+	public void btnMainActivityNuevoGastoOnClick(View view){
+		Intent intent = new Intent(this,GastosActivity.class);
 		startActivity(intent);	
-	}*/
-	
+	}
+	               
 	public void btnMainActivityReportesGastosOnClick(View view){
 		Intent intent = new Intent(this,ReporteActivity.class);
 		startActivity(intent);
