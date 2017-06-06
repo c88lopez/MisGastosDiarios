@@ -10,6 +10,26 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="ar.edu.ort.t5.grp1.misgastosdiarios.GastosActivity" >
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <Spinner
+            android:id="@+id/spnGastosActivityCategoria"
+            android:layout_width="166dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.87" />
+
+        <Button
+            android:id="@+id/btnGastosActivityABMCategorias"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="btnGastosActivityABMCategoriasOnClick"
+            android:text="@string/administrar_reducido" />
+
+    </LinearLayout>
+
     <GridLayout
         android:id="@+id/GridLayout1"
         android:layout_width="match_parent"
@@ -22,16 +42,13 @@
             android:layout_gravity="fill_vertical"
             android:orientation="vertical" >
 
-            <Spinner
-                android:id="@+id/spnGastosActivityCategoria"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
             <EditText
                 android:id="@+id/etGastosActivityImporte"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:ems="10" >
+                android:layout_weight="0.50"
+                android:ems="10"
+                android:hint="@string/importe" >
 
                 <requestFocus />
             </EditText>
@@ -41,7 +58,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="10"
+                android:hint="@string/descripcion"
                 android:inputType="numberDecimal" />
+
         </LinearLayout>
 
         <Space
@@ -50,27 +69,25 @@
             android:layout_row="1" />
     </GridLayout>
 
-    <Button
-        android:id="@+id/btnGastosActivityABMCategorias"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/administrar" />
-
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center" >
+        android:layout_height="match_parent"
+        android:gravity="bottom" >
 
         <Button
             android:id="@+id/btnGastosActivityAceptar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="btnGastosActivityAceptarOnClick"
             android:text="@string/aceptar" />
 
         <Button
             android:id="@+id/btnGastosActivityCancelar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="btnGastosActivityCancelarOnClick"
             android:text="@string/cancelar" />
 
     </LinearLayout>

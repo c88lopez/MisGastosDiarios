@@ -16,5 +16,10 @@
     <string name="administrar">Administrar</string>
     <string name="cancelar">Cancelar</string>
     <string name="aceptar">Aceptar</string>
+    <string name="actualizar">Actualizar</string>
+    <string name="title_activity_categoria">Categorias</string>
+    <string name="volver">Volver</string>
+    <string name="administrar_reducido">Admin</string>
+    <string name="descripcion">Descripcion</string>
 
 </resources>
