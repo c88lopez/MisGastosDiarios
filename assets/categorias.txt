@@ -1,0 +1,4 @@
+1;Alimento
+2;Porno
+3;Coimas
+4;Telo

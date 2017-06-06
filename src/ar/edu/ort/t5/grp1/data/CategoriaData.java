@@ -86,11 +86,16 @@ public class CategoriaData {
 	}
 
 	public void add(Categoria categoria) {
-
+	
 		ContentValues values = new ContentValues();
+		if (categoria.getId() != 0){
+			values.put(CategoriaEntry._ID, categoria.getId());
+		}
 		values.put(CategoriaEntry.COLUMN_NAME_DESCRIPCION, categoria.getDescripcion());
 		// insert
+		
 		categoria.setId(db.insert(CategoriaEntry.TABLE_NAME, null, values));
+		
 		db.close();
 	}
 
