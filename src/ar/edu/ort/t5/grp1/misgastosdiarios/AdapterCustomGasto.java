@@ -36,7 +36,7 @@ public class AdapterCustomGasto extends ArrayAdapter<Gasto> {
 		//Log.v(MainActivity.TAG,"FindByID!");
 
 		tvImporte.setText(String.valueOf(datos.get(position).getImporte()));
-		tvCategoria.setText(datos.get(position).getCategoria().getDescripcion());
+		tvCategoria.setText(datos.get(position).getCategoria()!=null?datos.get(position).getCategoria().getDescripcion():"");
 		tvDetalle.setText(datos.get(position).getDetalle());
 		tvfecha.setText(String.valueOf(datos.get(position).getFecha()));
 		

@@ -7,7 +7,7 @@ import android.content.Context;
 import ar.edu.ort.t5.grp1.data.GastoData;
 
 public class Gasto {
-	private long id;
+	private long id = -1;
 	private Categoria categoria;
 	private float importe;
 	private String detalle;

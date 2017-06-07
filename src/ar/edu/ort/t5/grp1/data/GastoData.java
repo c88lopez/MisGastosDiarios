@@ -18,19 +18,20 @@ import ar.edu.ort.t5.grp1.misgastosdiarios.Gasto;
 public class GastoData {
 	static final DateFormat dateformatter = new SimpleDateFormat("yyyyMMddHHmmss");
 	private static SQLiteDatabaseHandler handler;
-	private static SQLiteDatabase db;
+	//private static SQLiteDatabase db;
 
 	public GastoData(Context context) {
 		handler = SQLiteDatabaseHandler.getInstance(context);
-		db = handler.getDb();
+		//db = handler.getDb();
 	}
 
+	/*
 	protected void finalize() throws Throwable {
 		if (db.isOpen())
 			db.close();
 		super.finalize();
 	}
-
+	*/
 	private static Gasto getGasto(Cursor cursor) throws IllegalArgumentException, ParseException {
 		return new Gasto(cursor.getInt(cursor.getColumnIndexOrThrow(GastoEntry._ID)),
 				CategoriaData.get(cursor.getInt((cursor.getColumnIndexOrThrow(GastoEntry.COLUMN_NAME_CATEGORIA_ID)))),
@@ -44,7 +45,7 @@ public class GastoData {
 		SQLiteDatabase db = handler.getDb();
 		Cursor cursor = db.query(GastoEntry.TABLE_NAME, // a. table
 				GastoEntry.COLUMNS, // b. column names
-				" id = ?", // c. selections
+				GastoEntry._ID + " = ?", // c. selections
 				new String[] { String.valueOf(id) }, // d. selections args
 				null, // e. group by
 				null, // f. having
@@ -84,7 +85,7 @@ public class GastoData {
 		return gastos;
 	}
 
-	public List<Gasto> getGastos(java.util.Date desde, java.util.Date hasta)
+	public List<Gasto> getList(java.util.Date desde, java.util.Date hasta)
 			throws IllegalArgumentException, ParseException {
 
 		List<Gasto> gastos = new LinkedList<Gasto>();
@@ -110,7 +111,7 @@ public class GastoData {
 		return gastos;
 	}
 
-	public List<Gasto> getGastos(Categoria categoria) throws IllegalArgumentException, ParseException {
+	public List<Gasto> getList(Categoria categoria) throws IllegalArgumentException, ParseException {
 
 		List<Gasto> gastos = new LinkedList<Gasto>();
 		SQLiteDatabase db = handler.getDb();
@@ -135,8 +136,8 @@ public class GastoData {
 		return gastos;
 	}
 
-	public long add(Gasto gasto) {
-
+	public long insert(Gasto gasto) {
+		SQLiteDatabase db = handler.getDb();
 		ContentValues values = new ContentValues();
 		if (gasto.getId() != -1) 
 			values.put(GastoEntry._ID, gasto.getId());
@@ -152,6 +153,7 @@ public class GastoData {
 	}
 
 	public int update(Gasto gasto) {
+		SQLiteDatabase db = handler.getDb();
 		ContentValues values = new ContentValues();
 		values.put(GastoEntry.COLUMN_NAME_DESCRIPCION, gasto.getDetalle());
 		values.put(GastoEntry.COLUMN_NAME_IMPORTE, gasto.getImporte());
@@ -160,7 +162,7 @@ public class GastoData {
 				gasto.getCategoria() != null ? gasto.getCategoria().getId() : null);
 		int i = db.update(GastoEntry.TABLE_NAME, // table
 				values, // column/value
-				"id = ?", // selections
+				GastoEntry._ID + " = ?", // selections
 				new String[] { String.valueOf(gasto.getId()) });
 
 		db.close();
@@ -170,8 +172,8 @@ public class GastoData {
 
 	public void delete(Gasto gasto) {
 		// Get reference to writable DB
-
-		db.delete(GastoEntry.TABLE_NAME, "id = ?", new String[] { String.valueOf(gasto.getId()) });
+		SQLiteDatabase db = handler.getDb();
+		db.delete(GastoEntry.TABLE_NAME, GastoEntry._ID + " = ?", new String[] { String.valueOf(gasto.getId()) });
 		db.close();
 
 	}

@@ -1,6 +1,7 @@
 package ar.edu.ort.t5.grp1.data;
 
 import java.text.ParseException;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import android.annotation.SuppressLint;
@@ -8,6 +9,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 import ar.edu.ort.t5.grp1.data.CategoriaContract.CategoriaEntry;
 import ar.edu.ort.t5.grp1.data.GastoContract.GastoEntry;
 import ar.edu.ort.t5.grp1.misgastosdiarios.Categoria;
@@ -21,22 +23,23 @@ public class CategoriaData {
 	// SimpleDateFormat("yyyyMMddHHmmss");
 
 	private static SQLiteDatabaseHandler handler;
-	private static SQLiteDatabase db;
+	// private static SQLiteDatabase db;
 
 	public CategoriaData(Context context) {
 		handler = SQLiteDatabaseHandler.getInstance(context);
-		db = handler.getDb();
+		// db = handler.getDb();
 	}
 
-	protected void finalize() throws Throwable {
-		if (db.isOpen())
-			db.close();
-		super.finalize();
-	}
+	/*
+	 * protected void finalize() throws Throwable { if (db.isOpen()) db.close();
+	 * super.finalize(); }
+	 */
 
 	private static Categoria get(Cursor cursor) {
-		return new Categoria(cursor.getInt(cursor.getColumnIndexOrThrow(CategoriaEntry._ID)),
-				cursor.getString(cursor.getColumnIndexOrThrow(CategoriaEntry.COLUMN_NAME_DESCRIPCION)));
+		Categoria categoria = null;
+
+		return categoria;
+
 	}
 
 	public static Categoria get(int id) {
@@ -44,26 +47,43 @@ public class CategoriaData {
 		SQLiteDatabase db = handler.getDb();
 		Cursor cursor = db.query(CategoriaEntry.TABLE_NAME, // a. table
 				CategoriaEntry.COLUMNS, // b. column names
-				" id = ?", // c. selections
+				CategoriaEntry._ID + " = ?", // c. selections
 				new String[] { String.valueOf(id) }, // d. selections args
 				null, // e. group by
 				null, // f. having
 				null, // g. order by
 				null); // h. limit
-
-		if (cursor != null) {
-			cursor.moveToFirst();
-			categoria = get(cursor);
+		
+		if (cursor.moveToFirst()) {
+			categoria = new Categoria(cursor.getInt(cursor.getColumnIndexOrThrow(CategoriaEntry._ID)),
+				cursor.getString(cursor.getColumnIndexOrThrow(CategoriaEntry.COLUMN_NAME_DESCRIPCION)));
+		}
+		db.close();
+		return categoria;
+	}
+	public static Categoria get(String descripcion) {
+		Categoria categoria = null;
+		SQLiteDatabase db = handler.getDb();
+		Cursor cursor = db.query(CategoriaEntry.TABLE_NAME, // a. table
+				CategoriaEntry.COLUMNS, // b. column names
+				CategoriaEntry.COLUMN_NAME_DESCRIPCION + " = ?", // c. selections
+				new String[] { descripcion }, // d. selections args
+				null, // e. group by
+				null, // f. having
+				null, // g. order by
+				null); // h. limit
+		
+		if (cursor.moveToFirst()) {
+			categoria = new Categoria(cursor.getInt(cursor.getColumnIndexOrThrow(CategoriaEntry._ID)),
+				cursor.getString(cursor.getColumnIndexOrThrow(CategoriaEntry.COLUMN_NAME_DESCRIPCION)));
 		}
 		db.close();
 		return categoria;
 	}
 
 	public List<Categoria> getList() {
-
 		List<Categoria> categorias = new LinkedList<Categoria>();
 		SQLiteDatabase db = handler.getDb();
-		db = handler.getReadableDatabase();
 		// Cursor cursor = db.rawQuery(query, null);
 
 		Cursor cursor = db.query(CategoriaEntry.TABLE_NAME, // The table to
@@ -79,34 +99,46 @@ public class CategoriaData {
 		);
 
 		while (cursor.moveToNext()) {
-			categorias.add(get(cursor));
+			Categoria categoria = new Categoria(cursor.getInt(cursor.getColumnIndexOrThrow(CategoriaEntry._ID)),
+					cursor.getString(cursor.getColumnIndexOrThrow(CategoriaEntry.COLUMN_NAME_DESCRIPCION)));
+			categorias.add(categoria);
 		}
+
 		cursor.close();
 		db.close();
 		return categorias;
 	}
 
-	public void add(Categoria categoria) {
-		db = handler.getWritableDatabase();
-		ContentValues values = new ContentValues();
-		if (categoria.getId() != 0){
-			values.put(CategoriaEntry._ID, categoria.getId());
+	public void insert(Categoria categoria) {
+		if (get((int) categoria.getId()) == null) {
+			SQLiteDatabase db = handler.getDb();
+			Cursor c = db.rawQuery("SELECT * FROM categoria;", null);
+			while (c.moveToNext()) {
+				Log.i("APP", String.valueOf(String.valueOf(c.getInt(0)) + c.getString(1)));
+			}
+
+			ContentValues values = new ContentValues();
+			if (categoria.getId() != -1) {
+				values.put(CategoriaEntry._ID, categoria.getId());
+			}
+			values.put(CategoriaEntry.COLUMN_NAME_DESCRIPCION, categoria.getDescripcion());
+			// insert
+			if (get((int) categoria.getId()) == null) {
+				db = handler.getDb();
+				categoria.setId(db.insert(CategoriaEntry.TABLE_NAME, null, values));
+			}
+			db.close();
 		}
-		values.put(CategoriaEntry.COLUMN_NAME_DESCRIPCION, categoria.getDescripcion());
-		// insert
-		
-		categoria.setId(db.insert(CategoriaEntry.TABLE_NAME, null, values));
-		
-		db.close();
 	}
 
 	public int update(Categoria categoria) {
+		SQLiteDatabase db = handler.getDb();
 		ContentValues values = new ContentValues();
 		values.put(CategoriaEntry.COLUMN_NAME_DESCRIPCION, categoria.getDescripcion());
 
 		int i = db.update(CategoriaEntry.TABLE_NAME, // table
 				values, // column/value
-				"id = ?", // selections
+				CategoriaEntry._ID + " = ?", // selections
 				new String[] { String.valueOf(categoria.getId()) });
 
 		db.close();
@@ -115,28 +147,32 @@ public class CategoriaData {
 	}
 
 	public void delete(Categoria categoria) {
-		// Get reference to writable DB
-
-		db.delete(CategoriaEntry.TABLE_NAME, "id = ?", new String[] { String.valueOf(categoria.getId()) });
+		SQLiteDatabase db = handler.getDb();
+		db.delete(CategoriaEntry.TABLE_NAME, CategoriaEntry._ID + " = ?",
+				new String[] { String.valueOf(categoria.getId()) });
 		db.close();
 
 	}
-	
+
 	public List<Reporte> getReporte(int mes) throws IllegalArgumentException, ParseException {
 
 		List<Reporte> lista = new LinkedList<Reporte>();
 		SQLiteDatabase db = handler.getDb();
-		// Cursor cursor = db.rawQuery(query, null);
+		String s = Integer.toString(mes);
+		s = mes>9?"":"0" + s;
 		
-		String sql = "SELECT SUM(IMPORTE) SUMA FROM GASTO WHERE SUBSTR(GASTO.FECHA,5,2) = ?; ";
-		Cursor cursor = db.rawQuery(sql, new String[] { Integer.toString(mes) });
-		float suma = cursor.getFloat(cursor.getColumnIndexOrThrow("SUMA"));
+		String sql = "SELECT SUM(IMPORTE) suma FROM GASTO WHERE SUBSTR(GASTO.FECHA,5,2) = ?; ";
+		Cursor cursor = db.rawQuery(sql, new String[] { s});
+		float suma = cursor.moveToFirst() ? cursor.getFloat(cursor.getColumnIndexOrThrow("suma")) : 0;
 		
-		sql = "SELECT CATEGORIA._ID, CATEGORIA.DESCRIPCION, SUM(IMPORTE) IMPORTE, SUM(IMPORTE)*100/? FROM CATEGORIA INNER JOIN GASTO ON CATEGORIA._ID = GASTO.CATEGORIA_ID WHERE SUBSTR(GASTO.FECHA,5,2) = ? GROUP BY CATEGORIA._ID, CATEGORIA.DESCRIPCION; ";
-		db.rawQuery(sql, new String[] { Integer.toString(mes), Float.toString(suma) });
+		sql = "SELECT CATEGORIA._ID, CATEGORIA.DESCRIPCION, SUM(IMPORTE) importe, (SUM(IMPORTE)*100/?) porcentaje FROM GASTO LEFT JOIN CATEGORIA ON CATEGORIA._ID = GASTO.CATEGORIA_ID  WHERE SUBSTR(GASTO.FECHA,5,2) = ? GROUP BY CATEGORIA._ID, CATEGORIA.DESCRIPCION ORDER BY CATEGORIA.DESCRIPCION; ";
+		cursor = db.rawQuery(sql, new String[] { Float.toString(suma), s });
 		
 		while (cursor.moveToNext()) {
-			lista.add(new Reporte(get(cursor), cursor.getFloat(cursor.getColumnIndexOrThrow("IMPORTE")), cursor.getFloat(cursor.getColumnIndexOrThrow("PORCENTAJE"))));
+			Categoria categoria = new Categoria(cursor.getInt(cursor.getColumnIndexOrThrow(CategoriaEntry._ID)),
+					cursor.getString(cursor.getColumnIndexOrThrow(CategoriaEntry.COLUMN_NAME_DESCRIPCION)));
+			lista.add(new Reporte(categoria, cursor.getFloat(cursor.getColumnIndexOrThrow("importe")),
+					cursor.getFloat(cursor.getColumnIndexOrThrow("porcentaje"))));
 		}
 		cursor.close();
 		db.close();

@@ -13,11 +13,10 @@ public class SQLiteDatabaseHandler extends SQLiteOpenHelper {
 	private static SQLiteDatabaseHandler instance = null;
 	private static final int DATABASE_VERSION = 1;
 	private static final String DATABASE_NAME = "MisGastosDiariosDB";
-	private SQLiteDatabase db;
+	
 
 	private SQLiteDatabaseHandler(Context context) {	
-		super(context, DATABASE_NAME, null, DATABASE_VERSION);
-		this.db = this.getReadableDatabase();
+		super(context, DATABASE_NAME, null, DATABASE_VERSION);	
 	}
 
 	public static SQLiteDatabaseHandler getInstance(Context context) {
@@ -28,6 +27,8 @@ public class SQLiteDatabaseHandler extends SQLiteOpenHelper {
 	}
 
 	public SQLiteDatabase getDb() {
+		SQLiteDatabase db;
+		db = this.getWritableDatabase();
 		return db;
 	}
 

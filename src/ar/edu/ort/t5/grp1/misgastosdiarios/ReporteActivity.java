@@ -2,15 +2,24 @@ package ar.edu.ort.t5.grp1.misgastosdiarios;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.ListView;
+import ar.edu.ort.t5.grp1.data.CategoriaData;
+import ar.edu.ort.t5.grp1.data.GastoData;
 
 public class ReporteActivity extends Activity {
-
+	EditText etReporteActivityMes, etReporteActivityAnio;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_reporte);
+		etReporteActivityMes = (EditText) findViewById(R.id.etReporteActivityMes);
+		etReporteActivityAnio = (EditText) findViewById(R.id.etReporteActivityAnio);
 	}
 
 	@Override
@@ -30,5 +39,19 @@ public class ReporteActivity extends Activity {
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+	public void btnReporteActualizarOnClick(View view){
+		
+		try {
+			CategoriaData cd = new CategoriaData(this);
+			
+			ListView lvCustom = (ListView) findViewById(R.id.lvReporte);
+			
+			AdapterCustomReporte adapter = new AdapterCustomReporte(getBaseContext(), cd.getReporte(Integer.parseInt(etReporteActivityMes.getText().toString())));
+			
+			lvCustom.setAdapter(adapter);
+		} catch (Exception e) {
+			Log.e("etReporteActivityMes", e.getMessage());
+		}
 	}
 }

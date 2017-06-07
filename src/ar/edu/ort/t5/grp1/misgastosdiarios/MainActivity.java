@@ -7,6 +7,7 @@ import java.io.InputStreamReader;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -33,7 +34,7 @@ public class MainActivity extends Activity {
 		       String[] vec = mLine.split(";");
 		       if (vec.length == 2) {
 		    	   Categoria categoria = new Categoria(Integer.parseInt(vec[0]) , vec[1]);
-		    	   cData.add(categoria);
+		    	   cData.insert(categoria);
 		       }
 		       
 		    }
@@ -44,7 +45,7 @@ public class MainActivity extends Activity {
 		         try {
 		             reader.close();
 		         } catch (IOException e) {
-		             //log the exception
+		             Log.e(STORAGE_SERVICE, e.getMessage());
 		         }
 		    }
 		}

@@ -36,14 +36,13 @@ public class GastosActivity extends Activity {
 		List<Categoria> listaCat = cd.getList();
 		
 		String[] opciones;
-		if(listaCat.size()==0)
+		if(listaCat.isEmpty())
 		{
 			//Se carga desde el Archivo  raw
 			opciones = new String[] {"cat1","cat2","cat3"};
 		}
 		else {
 			opciones = new String[listaCat.size()];
-			
 			int i =0;
 			for (Categoria cat : listaCat) {
 				opciones[i] = cat.getDescripcion();
@@ -86,11 +85,12 @@ public class GastosActivity extends Activity {
 		if(ValidarCampos())
 		{
 			try{
+			CategoriaData cd = new CategoriaData(this);
 			GastoData gd = new GastoData(this);
-			gd.add(new Gasto(
-					new Categoria(
-							spnGastosActivityCategoria.getSelectedItem().toString()
-							),
+			gd.insert(new Gasto(
+					cd.get(spnGastosActivityCategoria.getSelectedItem().toString())
+							
+							,
 					Float.parseFloat(etGastosActivityImporte.getText().toString()),
 					etGastosActivityDescripcion.getText().toString()
 					));
@@ -111,8 +111,8 @@ public class GastosActivity extends Activity {
 	}
 	
 	public void btnGastosActivityABMCategoriasOnClick(View view){
-		//Intent intent = new Intent(this,CategoriaActivity.class);
-		//startActivity(intent);
+		Intent intent = new Intent(this,CategoriaActivity.class);
+		startActivity(intent);
 	}
 	
 	private void MostrarMensaje(String msj)
