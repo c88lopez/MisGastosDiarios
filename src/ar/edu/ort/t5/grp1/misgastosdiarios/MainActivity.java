@@ -24,7 +24,7 @@ public class MainActivity extends Activity {
 		BufferedReader reader = null;
 		try {
 		    reader = new BufferedReader(
-		        new InputStreamReader(getAssets().open("filename.txt")));
+		        new InputStreamReader(getAssets().open("categorias.txt")));
 
 		    // do reading, usually loop until end of file reading  
 		    String mLine;
