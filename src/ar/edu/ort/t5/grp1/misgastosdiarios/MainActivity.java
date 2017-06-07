@@ -1,5 +1,9 @@
 package ar.edu.ort.t5.grp1.misgastosdiarios;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
+import ar.edu.ort.t5.grp1.data.CategoriaData;
 import ar.edu.ort.t5.grp1.data.GastoData;
 
 public class MainActivity extends Activity {
@@ -15,6 +20,34 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		
+		BufferedReader reader = null;
+		try {
+		    reader = new BufferedReader(
+		        new InputStreamReader(getAssets().open("filename.txt")));
+
+		    // do reading, usually loop until end of file reading  
+		    String mLine;
+		    CategoriaData cData = new CategoriaData(this);
+		    while ((mLine = reader.readLine()) != null) {
+		       String[] vec = mLine.split(";");
+		       if (vec.length == 2) {
+		    	   Categoria categoria = new Categoria(Integer.parseInt(vec[0]) , vec[1]);
+		    	   cData.add(categoria);
+		       }
+		       
+		    }
+		} catch (IOException e) {
+		    //log the exception
+		} finally {
+		    if (reader != null) {
+		         try {
+		             reader.close();
+		         } catch (IOException e) {
+		             //log the exception
+		         }
+		    }
+		}
 		
 		try {
 			GastoData gastodata = new GastoData(this);
@@ -49,11 +82,11 @@ public class MainActivity extends Activity {
 		return super.onOptionsItemSelected(item);
 	}
 	
-/*	public void btnMainActivityNuevoGastoOnClick(View view){
-		Intent intent = new Intent(this,xxx.class);
+	public void btnMainActivityNuevoGastoOnClick(View view){
+		Intent intent = new Intent(this,GastosActivity.class);
 		startActivity(intent);	
-	}*/
-	
+	}
+	               
 	public void btnMainActivityReportesGastosOnClick(View view){
 		Intent intent = new Intent(this,ReporteActivity.class);
 		startActivity(intent);

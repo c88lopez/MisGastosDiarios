@@ -21,5 +21,7 @@
     <string name="volver">Volver</string>
     <string name="administrar_reducido">Admin</string>
     <string name="descripcion">Descripcion</string>
+    <string name="title_activity_abmcategoria">ABM Categoria</string>
+    <string name="borrar">Borrar</string>
 
 </resources>

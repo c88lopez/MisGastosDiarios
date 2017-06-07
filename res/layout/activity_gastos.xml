@@ -10,26 +10,6 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="ar.edu.ort.t5.grp1.misgastosdiarios.GastosActivity" >
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-
-        <Spinner
-            android:id="@+id/spnGastosActivityCategoria"
-            android:layout_width="166dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.87" />
-
-        <Button
-            android:id="@+id/btnGastosActivityABMCategorias"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:onClick="btnGastosActivityABMCategoriasOnClick"
-            android:text="@string/administrar_reducido" />
-
-    </LinearLayout>
-
     <GridLayout
         android:id="@+id/GridLayout1"
         android:layout_width="match_parent"

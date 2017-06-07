@@ -34,6 +34,10 @@
             android:name=".CategoriaActivity"
             android:label="@string/title_activity_categoria" >
         </activity>
+        <activity
+            android:name=".ABMCategoriaActivity"
+            android:label="@string/title_activity_abmcategoria" >
+        </activity>
     </application>
 
 </manifest>
