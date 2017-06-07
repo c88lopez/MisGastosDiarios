@@ -63,6 +63,7 @@ public class CategoriaData {
 
 		List<Categoria> categorias = new LinkedList<Categoria>();
 		SQLiteDatabase db = handler.getDb();
+		db = handler.getReadableDatabase();
 		// Cursor cursor = db.rawQuery(query, null);
 
 		Cursor cursor = db.query(CategoriaEntry.TABLE_NAME, // The table to
@@ -86,7 +87,7 @@ public class CategoriaData {
 	}
 
 	public void add(Categoria categoria) {
-	
+		db = handler.getWritableDatabase();
 		ContentValues values = new ContentValues();
 		if (categoria.getId() != 0){
 			values.put(CategoriaEntry._ID, categoria.getId());
