@@ -14,6 +14,7 @@
         android:id="@+id/lvCategorias"
         android:layout_width="match_parent"
         android:layout_height="377dp" >
+
     </ListView>
 
     <LinearLayout
@@ -21,14 +22,15 @@
         android:layout_height="wrap_content" >
 
         <Button
-            android:id="@+id/btnCategoriaActivityNuevo"
+            android:id="@+id/btnCategoriaActivityNuevaCategoriaOnClick"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:onClick="btnCategoriaActivityNuevaCategoriaOnClick"
             android:text="@string/nuevo" />
 
         <Button
-            android:id="@+id/btnCategoriaActivityVolver"
+            android:id="@+id/btnCategoriaActivityVolverOnClick"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"

@@ -3,9 +3,12 @@ package ar.edu.ort.t5.grp1.misgastosdiarios;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ListView;
 import ar.edu.ort.t5.grp1.data.CategoriaData;
 
@@ -22,8 +25,22 @@ public class CategoriaActivity extends Activity {
 			ListView lvCustom = (ListView) findViewById(R.id.lvCategorias);
 
 			AdapterCustomCategoria adapter = new AdapterCustomCategoria(getBaseContext(), categoriadata.getList());
-
+//inicio
 			lvCustom.setAdapter(adapter);
+			
+			lvCustom.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+				  @Override
+				  public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
+
+				    //Object o = listView.getItemAtPosition(position);
+				    // Realiza lo que deseas, al recibir clic en el elemento de tu listView determinado por su posicion.
+				    Log.i("Click", "click en el elemento " + position + " de mi ListView");
+
+				  }
+				});
+//fin		
+			
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
