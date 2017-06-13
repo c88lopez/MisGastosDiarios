@@ -18,14 +18,15 @@ public class CategoriaActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_categoria);
+		Comunicador.setObjeto(null);
 
 		try {
 			CategoriaData categoriadata = new CategoriaData(this);
 
-			ListView lvCustom = (ListView) findViewById(R.id.lvCategorias);
+			final ListView lvCustom = (ListView) findViewById(R.id.lvCategorias);
 
 			AdapterCustomCategoria adapter = new AdapterCustomCategoria(getBaseContext(), categoriadata.getList());
-//inicio
+
 			lvCustom.setAdapter(adapter);
 			
 			lvCustom.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -33,14 +34,15 @@ public class CategoriaActivity extends Activity {
 				  @Override
 				  public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
 
-				    //Object o = listView.getItemAtPosition(position);
+				    Categoria categoria = (Categoria) arg0.getAdapter().getItem(position);
 				    // Realiza lo que deseas, al recibir clic en el elemento de tu listView determinado por su posicion.
-				    Log.i("Click", "click en el elemento " + position + " de mi ListView");
-
+				    Log.i("Click", "click en el elemento " + position + " de mi ListView, que contiene " + categoria.getDescripcion());
+					Comunicador.setObjeto(categoria);
+					Intent intent = new Intent(CategoriaActivity.this, ABMCategoriaActivity.class);
+					startActivity(intent);
 				  }
 				});
-//fin		
-			
+
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
