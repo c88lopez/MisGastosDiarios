@@ -1,9 +1,13 @@
 package ar.edu.ort.t5.grp1.misgastosdiarios;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ListView;
+import ar.edu.ort.t5.grp1.data.CategoriaData;
 
 public class CategoriaActivity extends Activity {
 
@@ -11,6 +15,18 @@ public class CategoriaActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_categoria);
+
+		try {
+			CategoriaData categoriadata = new CategoriaData(this);
+
+			ListView lvCustom = (ListView) findViewById(R.id.lvCategorias);
+
+			AdapterCustomCategoria adapter = new AdapterCustomCategoria(getBaseContext(), categoriadata.getList());
+
+			lvCustom.setAdapter(adapter);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 	}
 
 	@Override
@@ -30,5 +46,15 @@ public class CategoriaActivity extends Activity {
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+
+	public void btnCategoriaActivityNuevaCategoriaOnClick(View view) {
+		Intent intent = new Intent(this, ABMCategoriaActivity.class);
+		startActivity(intent);
+	}
+
+	public void btnCategoriaActivityVolverOnClick(View view) {
+		Intent intent = new Intent(this, GastosActivity.class);
+		startActivity(intent);
 	}
 }
