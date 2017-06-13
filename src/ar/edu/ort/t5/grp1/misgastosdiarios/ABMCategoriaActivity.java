@@ -32,10 +32,10 @@ public class ABMCategoriaActivity extends Activity {
 		
 		if(cate == null)
 		{//Nuevo
-			btnBorrar.setVisibility(1);//hago invisible el boton borrar
+			btnBorrar.setVisibility(View.INVISIBLE);//hago invisible el boton borrar
 		}else{ //Modificacion
 			etDescripcion.setText(cate.getDescripcion());
-			btnBorrar.setVisibility(0);
+			btnBorrar.setVisibility(View.VISIBLE);
 		}
 	}
 
