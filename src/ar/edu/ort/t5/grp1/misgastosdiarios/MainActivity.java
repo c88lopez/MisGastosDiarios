@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 import ar.edu.ort.t5.grp1.data.CategoriaData;
+import ar.edu.ort.t5.grp1.data.FileManager;
 import ar.edu.ort.t5.grp1.data.GastoData;
 
 public class MainActivity extends Activity {
@@ -22,33 +23,7 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
-		BufferedReader reader = null;
-		try {
-		    reader = new BufferedReader(
-		        new InputStreamReader(getAssets().open("categorias.txt")));
-
-		    // do reading, usually loop until end of file reading  
-		    String mLine;
-		    CategoriaData cData = new CategoriaData(this);
-		    while ((mLine = reader.readLine()) != null) {
-		       String[] vec = mLine.split(";");
-		       if (vec.length == 2) {
-		    	   Categoria categoria = new Categoria(Integer.parseInt(vec[0]) , vec[1]);
-		    	   cData.insert(categoria);
-		       }
-		       
-		    }
-		} catch (IOException e) {
-		    //log the exception
-		} finally {
-		    if (reader != null) {
-		         try {
-		             reader.close();
-		         } catch (IOException e) {
-		             Log.e(STORAGE_SERVICE, e.getMessage());
-		         }
-		    }
-		}
+		FileManager.importarCategorias(this);
 		
 		try {
 			GastoData gastodata = new GastoData(this);
