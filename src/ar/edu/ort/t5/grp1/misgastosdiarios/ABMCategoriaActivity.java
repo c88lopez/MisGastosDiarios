@@ -25,16 +25,18 @@ public class ABMCategoriaActivity extends Activity {
 		
 		etDescripcion = (EditText) findViewById(R.id.etABMCategoriaDescripcion);
 		btnBorrar = (Button) findViewById(R.id.btnABMCategoriaActivityBorrar);
+		
 		//Capturar datos por parametro del listViewCategoria
 		//Si llega por parametro es una modificacion (update)
+		cate =(Categoria) Comunicador.getObjeto();
+		
 		if(cate == null)
 		{//Nuevo
-			btnBorrar.setVisibility(0);
+			btnBorrar.setVisibility(1);//hago invisible el boton borrar
 		}else{ //Modificacion
 			etDescripcion.setText(cate.getDescripcion());
 			btnBorrar.setVisibility(0);
 		}
-		
 	}
 
 	@Override
@@ -56,7 +58,7 @@ public class ABMCategoriaActivity extends Activity {
 		return super.onOptionsItemSelected(item);
 	}
 	
-	public void btnABMCategoriaActivityAceptar(View view){
+	public void btnABMCategoriaActivityAceptarOnClick(View view){
 		if(ValidarCampos())
 		{
 			try{
@@ -78,11 +80,11 @@ public class ABMCategoriaActivity extends Activity {
 		}
 	}
 	
-	public void btnABMCategoriaActivityCancelar(View view){
+	public void btnABMCategoriaActivityCancelarOnClick(View view){
 		IrACategoriaActivity();
 	}
 	
-	public void btnABMCategoriaActivityBorrar(View view){
+	public void btnABMCategoriaActivityBorrarOnClick(View view){
 		try{
 			CategoriaData cd = new CategoriaData(this);
 			cd.delete(cate);
