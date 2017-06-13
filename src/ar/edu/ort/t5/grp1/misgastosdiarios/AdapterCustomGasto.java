@@ -1,8 +1,14 @@
 package ar.edu.ort.t5.grp1.misgastosdiarios;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import android.content.Context;
+
+import java.math.BigDecimal;
+import java.text.DateFormat;
+import java.text.ParseException;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,10 +41,21 @@ public class AdapterCustomGasto extends ArrayAdapter<Gasto> {
 		TextView tvfecha = (TextView)item.findViewById(R.id.tvListViewGastoFecha);
 		//Log.v(MainActivity.TAG,"FindByID!");
 
-		tvImporte.setText(String.valueOf(datos.get(position).getImporte()));
+		tvImporte.setText(String.valueOf(round(datos.get(position).getImporte(),2)));
 		tvCategoria.setText(datos.get(position).getCategoria()!=null?datos.get(position).getCategoria().getDescripcion():"");
 		tvDetalle.setText(datos.get(position).getDetalle());
-		tvfecha.setText(String.valueOf(datos.get(position).getFecha()));
+		
+		/*
+		DateFormat dateformatter = new SimpleDateFormat("yyyymmdd");
+		try {
+			tvfecha.setText(String.valueOf(dateformatter.parse(String.valueOf(datos.get(position).getFecha()))));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		*/
+		tvfecha.setText(new SimpleDateFormat("dd-MM-yyyy").format(datos.get(position).getFecha()));
+		//tvfecha.setText(String.valueOf(datos.get(position).getFecha()));
 		
 		//Devuelvo la vista para que el adaptador la agregue a la lista.
 		return item;
@@ -50,4 +67,10 @@ public class AdapterCustomGasto extends ArrayAdapter<Gasto> {
 		TextView tvDetalle;
 		TextView tvfecha;
 	}
+	
+	private float round(float d, int decimalPlace) {
+        BigDecimal bd = new BigDecimal(Float.toString(d));
+        bd = bd.setScale(decimalPlace, BigDecimal.ROUND_HALF_UP);
+        return bd.floatValue();
+    }
 }
