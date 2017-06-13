@@ -183,13 +183,13 @@ public class CategoriaData {
 		List<Reporte> lista = new LinkedList<Reporte>();
 		SQLiteDatabase db = handler.getDb();
 		String s = Integer.toString(mes);
-		s = mes>9?"":"0" + s + Integer.toString(ano);
+		s = Integer.toString(ano) + (mes>9?"":"0") + s ;
 		
-		String sql = "SELECT SUM(IMPORTE) suma FROM GASTO WHERE SUBSTR(GASTO.FECHA,5,2) = ?; ";
+		String sql = "SELECT SUM(IMPORTE) suma FROM GASTO WHERE SUBSTR(GASTO.FECHA,1,6) = ?; ";
 		Cursor cursor = db.rawQuery(sql, new String[] { s});
 		float suma = cursor.moveToFirst() ? cursor.getFloat(cursor.getColumnIndexOrThrow("suma")) : 0;
 		
-		sql = "SELECT CATEGORIA._ID, CATEGORIA.DESCRIPCION, SUM(IMPORTE) importe, (SUM(IMPORTE)*100/?) porcentaje FROM GASTO LEFT JOIN CATEGORIA ON CATEGORIA._ID = GASTO.CATEGORIA_ID  WHERE SUBSTR(GASTO.FECHA,1,8) = ? GROUP BY CATEGORIA._ID, CATEGORIA.DESCRIPCION ORDER BY CATEGORIA.DESCRIPCION; ";
+		sql = "SELECT CATEGORIA._ID, CATEGORIA.DESCRIPCION, SUM(IMPORTE) importe, (SUM(IMPORTE)*100/?) porcentaje FROM GASTO LEFT JOIN CATEGORIA ON CATEGORIA._ID = GASTO.CATEGORIA_ID  WHERE SUBSTR(GASTO.FECHA,1,6) = ? GROUP BY CATEGORIA._ID, CATEGORIA.DESCRIPCION ORDER BY CATEGORIA.DESCRIPCION; ";
 		cursor = db.rawQuery(sql, new String[] { Float.toString(suma), s });
 		
 		while (cursor.moveToNext()) {

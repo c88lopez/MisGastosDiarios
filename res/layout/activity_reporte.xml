@@ -15,26 +15,17 @@
         android:layout_height="wrap_content"
         android:gravity="center_horizontal" >
 
-        <EditText
-            android:id="@+id/etReporteActivityMes"
+        <Spinner
+            android:id="@+id/spinnerMes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="5"
-            android:hint="@string/seleccione_mes"
-            android:inputType="number" >
+            android:layout_weight="1" />
 
-            <requestFocus />
-        </EditText>
-
-        <EditText
-            android:id="@+id/etReporteActivityAnio"
+        <Spinner
+            android:id="@+id/spinnerAnio"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="5"
-            android:hint="@string/seleccione_anio"
-            android:inputType="number" />
+            android:layout_weight="1" />
 
         <Button
             android:id="@+id/btnReporteActualizar"

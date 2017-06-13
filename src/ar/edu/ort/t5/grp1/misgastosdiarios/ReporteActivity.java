@@ -6,20 +6,35 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Spinner;
 import ar.edu.ort.t5.grp1.data.CategoriaData;
 import ar.edu.ort.t5.grp1.data.GastoData;
 
 public class ReporteActivity extends Activity {
 	EditText etReporteActivityMes, etReporteActivityAnio;
+	Spinner spinnerMes, spinnerAnio;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_reporte);
-		etReporteActivityMes = (EditText) findViewById(R.id.etReporteActivityMes);
-		etReporteActivityAnio = (EditText) findViewById(R.id.etReporteActivityAnio);
+		spinnerMes = (Spinner) findViewById(R.id.spinnerMes);
+		spinnerAnio = (Spinner) findViewById(R.id.spinnerAnio);
+				
+		ArrayAdapter spinner_adapter_mes = ArrayAdapter.createFromResource( this, R.array.meses , android.R.layout.simple_spinner_item);
+		spinner_adapter_mes.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		spinnerMes.setAdapter(spinner_adapter_mes);
+		
+		ArrayAdapter spinner_adapter_anio = ArrayAdapter.createFromResource( this, R.array.anios , android.R.layout.simple_spinner_item);
+		spinner_adapter_anio.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		spinnerAnio.setAdapter(spinner_adapter_anio);
+
+		
+		//etReporteActivityMes = (EditText) findViewById(R.id.etReporteActivityMes);
+		//etReporteActivityAnio = (EditText) findViewById(R.id.etReporteActivityAnio);
 	}
 
 	@Override
@@ -47,7 +62,9 @@ public class ReporteActivity extends Activity {
 			
 			ListView lvCustom = (ListView) findViewById(R.id.lvReporte);
 			
-			AdapterCustomReporte adapter = new AdapterCustomReporte(getBaseContext(), cd.getReporte(Integer.parseInt(etReporteActivityMes.getText().toString())));
+			AdapterCustomReporte adapter = new AdapterCustomReporte(getBaseContext(), cd.getReporte(Integer.parseInt(spinnerMes.getSelectedItem().toString()),Integer.parseInt(spinnerAnio.getSelectedItem().toString())));
+			Log.i("MES", spinnerMes.getSelectedItem().toString());
+			Log.i("ANIO", spinnerAnio.getSelectedItem().toString());
 			
 			lvCustom.setAdapter(adapter);
 		} catch (Exception e) {
