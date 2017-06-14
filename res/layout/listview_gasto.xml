@@ -8,8 +8,11 @@
 
     <TextView
         android:id="@+id/tvListViewGastoImporte"
-        android:layout_width="wrap_content"
+        android:layout_width="110dp"
         android:layout_height="38dp"
+        android:layout_gravity="right"
+        android:gravity="left"
+        android:maxLines="1"
         android:text="$ 1200"
         android:textSize="@dimen/tvImporte" />
 
@@ -22,15 +25,17 @@
 
         <TextView
             android:id="@+id/tvListViewGastoCategoria"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:text="Ropa"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tvListViewGastoDetalle"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:text="Pantalon" />
 
     </LinearLayout>
@@ -39,6 +44,8 @@
         android:id="@+id/tvListViewGastoFecha"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_weight=".5"
+        android:gravity="right"
         android:text="13/05/2017" />
 
 </LinearLayout>
