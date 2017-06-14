@@ -50,7 +50,8 @@ public class GastosActivity extends Activity {
 			}
 		}
 		  
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, opciones);
+		ArrayAdapter<Categoria> adapter = new ArrayAdapter<Categoria>(this, android.R.layout.simple_spinner_item, listaCat);
+		
 		spnGastosActivityCategoria.setAdapter(adapter);
 		
 		//ArrayAdapter<Categoria> adap = ArrayAdapter.createFromResource(this,R.,android.R.layout.simple_spinner_item);
@@ -88,9 +89,7 @@ public class GastosActivity extends Activity {
 			CategoriaData cd = new CategoriaData(this);
 			GastoData gd = new GastoData(this);
 			gd.insert(new Gasto(
-					cd.get(spnGastosActivityCategoria.getSelectedItem().toString())
-							
-							,
+					(Categoria)spnGastosActivityCategoria.getSelectedItem(),
 					Float.parseFloat(etGastosActivityImporte.getText().toString()),
 					etGastosActivityDescripcion.getText().toString()
 					));
