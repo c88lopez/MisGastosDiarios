@@ -159,18 +159,18 @@ public class GastosActivity extends Activity {
 			}
 		}
 		
-		if(etGastosActivityDescripcion.getText().toString() == "")
+		if(etGastosActivityDescripcion.getText().toString().isEmpty())
 		{
 			MostrarMensaje("Debe Ingresar una descripcion");
 			return false;
 		} else {
 			if(etGastosActivityImporte.getText().length() > LARGO_DESCRIPCION)
 			{
-				MostrarMensaje("El importe no puede superar " + String.valueOf(LARGO_DESCRIPCION) + " caracteres");
+				MostrarMensaje("La descripcion no puede superar " + String.valueOf(LARGO_DESCRIPCION) + " caracteres");
 				return false;
+			}else{
+				return true;
 			}
 		}
-		
-		return true;
 	}
 }

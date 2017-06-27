@@ -81,7 +81,7 @@ public class CategoriaData {
 		return categoria;
 	}
 
-	public List<Categoria> getList() {
+	public static List<Categoria> getList() {
 		List<Categoria> categorias = new LinkedList<Categoria>();
 		SQLiteDatabase db = handler.getDb();
 		// Cursor cursor = db.rawQuery(query, null);
@@ -146,12 +146,25 @@ public class CategoriaData {
 		return i;
 	}
 
-	public void delete(Categoria categoria) {
+	public void delete(Categoria categoria) throws Exception {
+		if (enUso(categoria)) {
+			throw new Exception("La categoria esta en uso");
+		}
 		SQLiteDatabase db = handler.getDb();
+		
 		db.delete(CategoriaEntry.TABLE_NAME, CategoriaEntry._ID + " = ?",
 				new String[] { String.valueOf(categoria.getId()) });
 		db.close();
 
+	}
+	
+	private boolean enUso (Categoria categoria){
+		SQLiteDatabase db = handler.getDb();
+		String s = categoria != null ? Long.toString(categoria.getId()) : "";
+		
+		String sql = "SELECT COUNT(*) FROM GASTO WHERE GASTO.CATEGORIA_ID = ?; ";
+		Cursor cursor = db.rawQuery(sql, new String[] {s});
+		return cursor.getLong(0) == 0;
 	}
 
 	public List<Reporte> getReporte(int mes) throws IllegalArgumentException, ParseException {
@@ -165,7 +178,7 @@ public class CategoriaData {
 		Cursor cursor = db.rawQuery(sql, new String[] { s});
 		float suma = cursor.moveToFirst() ? cursor.getFloat(cursor.getColumnIndexOrThrow("suma")) : 0;
 		
-		sql = "SELECT CATEGORIA._ID, CATEGORIA.DESCRIPCION, ROUND(SUM(IMPORTE),2) importe, ROUND((SUM(IMPORTE)*100/?),2) porcentaje FROM GASTO LEFT JOIN CATEGORIA ON CATEGORIA._ID = GASTO.CATEGORIA_ID  WHERE SUBSTR(GASTO.FECHA,5,2) = ? GROUP BY CATEGORIA._ID, CATEGORIA.DESCRIPCION ORDER BY CATEGORIA.DESCRIPCION; ";
+		sql = "SELECT CATEGORIA._ID, CATEGORIA.DESCRIPCION, ROUND(SUM(IMPORTE),2) importe, ROUND((SUM(IMPORTE)*100/?),2) porcentaje FROM GASTO LEFT JOIN CATEGORIA ON CATEGORIA._ID = GASTO.CATEGORIA_ID  WHERE SUBSTR(GASTO.FECHA,5,2) = ? GROUP BY CATEGORIA._ID, CATEGORIA.DESCRIPCION ORDER BY ROUND(SUM(IMPORTE),2); ";
 		cursor = db.rawQuery(sql, new String[] { Float.toString(suma), s });
 		
 		while (cursor.moveToNext()) {
