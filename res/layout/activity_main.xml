@@ -1,7 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/lyMain"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="match_parent"
     android:onClick="btnMainActivityNuevoGastoOnClick"
     android:orientation="vertical"
@@ -18,31 +18,41 @@
         android:layout_weight="0.70" >
     </ListView>
 
-    <GridLayout
-        android:id="@+id/GridLayout1"
+    <LinearLayout
+        android:id="@+id/LinearLayout1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:columnCount="3"
         android:orientation="horizontal" >
 
         <Button
             android:id="@+id/btnMainActivityNuevoGasto"
-            android:layout_width="148dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="left"
+            android:layout_weight="1"
             android:onClick="btnMainActivityNuevoGastoOnClick"
             android:text="@string/nuevo" />
 
         <Button
             android:id="@+id/btnMainActivityReportesGastos"
-            android:layout_width="60dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="fill_horizontal"
+            android:layout_weight="1"
             android:onClick="btnMainActivityReportesGastosOnClick"
             android:text="@string/reportes" />
 
         <Space
-            android:layout_column="2"
-            android:layout_gravity="fill_vertical"
-            android:layout_row="1" />
-    </GridLayout>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="fill_vertical" />
+
+        <Button
+            android:id="@+id/btnMainActivityExportar"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left|top"
+            android:layout_weight="1"
+            android:onClick="btnMainActivityExportarOnClick"
+            android:text="@string/exportar" />
+
+    </LinearLayout>
 
 </LinearLayout>

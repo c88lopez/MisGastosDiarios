@@ -67,4 +67,8 @@ public class MainActivity extends Activity {
 		Intent intent = new Intent(this,ReporteActivity.class);
 		startActivity(intent);
 	}
+	
+	public void btnMainActivityExportarOnClick(View view) {
+		
+	}
 }
