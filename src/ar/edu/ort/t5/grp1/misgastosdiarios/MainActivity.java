@@ -23,7 +23,8 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
-		FileManager.importarCategorias(this);
+		if (CategoriaData.getList().isEmpty()) 
+			FileManager.importarCategorias(this);
 		
 		try {
 			GastoData gastodata = new GastoData(this);
