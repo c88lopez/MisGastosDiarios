@@ -166,7 +166,7 @@ public class CategoriaData {
 		String sql = "SELECT COUNT(*) FROM GASTO WHERE GASTO.CATEGORIA_ID = ?; ";
 		Cursor cursor = db.rawQuery(sql, new String[] {s});
 		cursor.moveToFirst();
-		return cursor.getLong(0) == 0;
+		return cursor.getLong(0) > 0;
 	}
 
 	public List<Reporte> getReporte(int mes) throws IllegalArgumentException, ParseException {
