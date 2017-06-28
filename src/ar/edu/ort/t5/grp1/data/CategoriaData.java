@@ -109,8 +109,9 @@ public class CategoriaData {
 		return categorias;
 	}
 
-	public void insert(Categoria categoria) {
+	public void insert(Categoria categoria) throws Exception {
 		if (get((int) categoria.getId()) == null) {
+			if (get(categoria.getDescripcion()) != null) throw new Exception("La categoria ya existe");
 			SQLiteDatabase db = handler.getDb();
 			Cursor c = db.rawQuery("SELECT * FROM categoria;", null);
 			while (c.moveToNext()) {

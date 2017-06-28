@@ -35,6 +35,9 @@ public class FileManager {
 			}
 		} catch (IOException e) {
 			// log the exception
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		} finally {
 			if (reader != null) {
 				try {
@@ -47,7 +50,7 @@ public class FileManager {
 	}
 
 	public static void exportarReporte(Context context , List<Reporte> lista) {
-		File file = new File(context.getFilesDir(), "reporte.txt");
+		File file = new File(context.getExternalFilesDir("data"), "reporte.txt");
 		for( Reporte i : lista){
 			FileOutputStream fos;
 			try {
