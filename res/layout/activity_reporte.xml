@@ -15,25 +15,50 @@
         android:layout_height="wrap_content"
         android:gravity="center_horizontal" >
 
-        <Spinner
-            android:id="@+id/spinnerMes"
+        <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
+            android:layout_height="match_parent"
+            android:layout_weight="0.5" >
 
-        <Spinner
-            android:id="@+id/spinnerAnio"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
+            <Spinner
+                android:id="@+id/spinnerMes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
 
-        <Button
-            android:id="@+id/btnReporteActualizar"
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="btnReporteActualizarOnClick"
-            android:text="@string/actualizar" />
+            <Spinner
+                android:id="@+id/spinnerAnio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical" >
+
+            <Button
+                android:id="@+id/btnReporteActualizar"
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:onClick="btnReporteActualizarOnClick"
+                android:text="@string/actualizar" />
+
+            <Button
+                android:id="@+id/btnReporteExportar"
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:onClick="btnReporteExportarOnClick"
+                android:text="@string/exportar" />
+
+        </LinearLayout>
 
     </LinearLayout>
 
