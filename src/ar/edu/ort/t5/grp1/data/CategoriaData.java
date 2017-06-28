@@ -179,7 +179,7 @@ public class CategoriaData {
 		Cursor cursor = db.rawQuery(sql, new String[] { s});
 		float suma = cursor.moveToFirst() ? cursor.getFloat(cursor.getColumnIndexOrThrow("suma")) : 0;
 		
-		sql = "SELECT CATEGORIA._ID, CATEGORIA.DESCRIPCION, ROUND(SUM(IMPORTE),2) importe, ROUND((SUM(IMPORTE)*100/?),2) porcentaje FROM GASTO LEFT JOIN CATEGORIA ON CATEGORIA._ID = GASTO.CATEGORIA_ID  WHERE SUBSTR(GASTO.FECHA,5,2) = ? GROUP BY CATEGORIA._ID, CATEGORIA.DESCRIPCION ORDER BY ROUND(SUM(IMPORTE),2); ";
+		sql = "SELECT CATEGORIA._ID, CATEGORIA.DESCRIPCION, ROUND(SUM(IMPORTE),2) importe, ROUND((SUM(IMPORTE)*100/?),2) porcentaje FROM GASTO LEFT JOIN CATEGORIA ON CATEGORIA._ID = GASTO.CATEGORIA_ID  WHERE SUBSTR(GASTO.FECHA,5,2) = ? GROUP BY CATEGORIA._ID, CATEGORIA.DESCRIPCION ORDER BY ROUND(SUM(IMPORTE),2) DESC; ";
 		cursor = db.rawQuery(sql, new String[] { Float.toString(suma), s });
 		
 		while (cursor.moveToNext()) {
@@ -203,7 +203,7 @@ public class CategoriaData {
 		Cursor cursor = db.rawQuery(sql, new String[] { s});
 		float suma = cursor.moveToFirst() ? cursor.getFloat(cursor.getColumnIndexOrThrow("suma")) : 0;
 		
-		sql = "SELECT CATEGORIA._ID, CATEGORIA.DESCRIPCION, ROUND(SUM(IMPORTE),2) importe, (SUM(IMPORTE)*100/?) porcentaje FROM GASTO LEFT JOIN CATEGORIA ON CATEGORIA._ID = GASTO.CATEGORIA_ID  WHERE SUBSTR(GASTO.FECHA,1,6) = ? GROUP BY CATEGORIA._ID, CATEGORIA.DESCRIPCION ORDER BY CATEGORIA.DESCRIPCION; ";
+		sql = "SELECT CATEGORIA._ID, CATEGORIA.DESCRIPCION, ROUND(SUM(IMPORTE),2) importe, (SUM(IMPORTE)*100/?) porcentaje FROM GASTO LEFT JOIN CATEGORIA ON CATEGORIA._ID = GASTO.CATEGORIA_ID  WHERE SUBSTR(GASTO.FECHA,1,6) = ? GROUP BY CATEGORIA._ID, CATEGORIA.DESCRIPCION ORDER BY ROUND(SUM(IMPORTE),2) DESC; ";
 		cursor = db.rawQuery(sql, new String[] { Float.toString(suma), s });
 		
 		while (cursor.moveToNext()) {
