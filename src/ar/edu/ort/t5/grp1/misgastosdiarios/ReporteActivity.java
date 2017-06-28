@@ -1,5 +1,7 @@
 package ar.edu.ort.t5.grp1.misgastosdiarios;
 
+import java.text.ParseException;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,6 +13,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 import ar.edu.ort.t5.grp1.data.CategoriaData;
+import ar.edu.ort.t5.grp1.data.FileManager;
 import ar.edu.ort.t5.grp1.data.GastoData;
 
 public class ReporteActivity extends Activity {
@@ -71,4 +74,21 @@ public class ReporteActivity extends Activity {
 			Log.e("etReporteActivityMes", e.getMessage());
 		}
 	}
+	
+	public void btnReporteExportarOnClick(View view) {
+		CategoriaData cd = new CategoriaData(this);
+		try {
+			FileManager.exportarReporte(this, cd.getReporte(Integer.parseInt(spinnerMes.getSelectedItem().toString()),Integer.parseInt(spinnerAnio.getSelectedItem().toString())) );
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 }
