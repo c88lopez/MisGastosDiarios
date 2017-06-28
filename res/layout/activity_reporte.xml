@@ -8,6 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@drawable/fondo"
     tools:context="ar.edu.ort.t5.grp1.misgastosdiarios.ReporteActivity" >
 
     <LinearLayout
@@ -18,7 +19,7 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="0.5" >
+            android:layout_weight="1" >
 
             <Spinner
                 android:id="@+id/spinnerMes"
@@ -35,7 +36,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:orientation="vertical" >

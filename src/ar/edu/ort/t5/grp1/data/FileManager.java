@@ -55,7 +55,7 @@ public class FileManager {
 	
 				FileWriter fWriter;
 	
-				try {
+				try {					
 					fWriter = new FileWriter(fos.getFD());
 					fWriter.write(i.getCategoria().getDescripcion()+";"+Float.toString(i.getImporte())+";"+i.getPorcentaje());
 					fWriter.close();
