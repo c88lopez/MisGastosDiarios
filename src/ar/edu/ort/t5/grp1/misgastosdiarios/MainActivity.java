@@ -23,7 +23,7 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
-		if (CategoriaData.getList().isEmpty()) 
+		if ((new CategoriaData(this)).getList().isEmpty()) 
 			FileManager.importarCategorias(this);
 		
 		try {
