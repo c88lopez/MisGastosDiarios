@@ -13,7 +13,7 @@ import android.widget.Toast;
 import ar.edu.ort.t5.grp1.data.CategoriaData;
 
 public class ABMCategoriaActivity extends Activity {
-
+	EditText etABMCategoriaDescripcion;
 	Categoria cate;
 	EditText etDescripcion;
 	Button btnBorrar;
@@ -68,7 +68,8 @@ public class ABMCategoriaActivity extends Activity {
 					cd.insert(new Categoria(String.valueOf(etDescripcion.getText())));
 				}else
 				{//modificacion
-					cd.update(cate);
+					cate.setDescripcion(((EditText)findViewById(R.id.etABMCategoriaDescripcion)).getText().toString());
+					cd.update(cate);	
 				}
 				MostrarMensaje("Categoria registrada correctamente");
 				IrACategoriaActivity();
