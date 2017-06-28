@@ -13,6 +13,8 @@ import java.util.List;
 
 import android.content.Context;
 import android.util.Log;
+import android.view.Gravity;
+import android.widget.Toast;
 import ar.edu.ort.t5.grp1.misgastosdiarios.Categoria;
 import ar.edu.ort.t5.grp1.misgastosdiarios.Reporte;
 
@@ -51,10 +53,13 @@ public class FileManager {
 
 	public static void exportarReporte(Context context , List<Reporte> lista) {
 		File file = new File(context.getExternalFilesDir("data"), "reporte.txt");
+		Toast toast = Toast.makeText(context, "Exportando a " + file.getPath(), 1000 );
+        toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+        toast.show();
 		for( Reporte i : lista){
 			FileOutputStream fos;
 			try {
-				fos = new FileOutputStream(file);
+				fos = new FileOutputStream(file, true);
 	
 				FileWriter fWriter;
 	

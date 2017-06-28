@@ -1,4 +1,4 @@
 1;Alimento
-2;Porno
-3;Coimas
-4;Telo
+2;Bebida
+3;Entretenimiento
+4;Viaticos
