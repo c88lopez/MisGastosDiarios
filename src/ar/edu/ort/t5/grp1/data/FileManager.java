@@ -1,16 +1,12 @@
 package ar.edu.ort.t5.grp1.data;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
 import java.util.List;
-
 import android.content.Context;
 import android.util.Log;
 import android.view.Gravity;
@@ -56,6 +52,7 @@ public class FileManager {
 		Toast toast = Toast.makeText(context, "Exportando a " + file.getPath(), 1000 );
         toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
         toast.show();
+        String nl = System.getProperty("line.separator");
 		for( Reporte i : lista){
 			FileOutputStream fos;
 			try {
@@ -65,7 +62,8 @@ public class FileManager {
 	
 				try {					
 					fWriter = new FileWriter(fos.getFD());
-					fWriter.write(i.getCategoria().getDescripcion()+";"+Float.toString(i.getImporte())+";"+i.getPorcentaje());
+					fWriter.write(i.getCategoria().getDescripcion()+";"+Float.toString(i.getImporte())+";"+i.getPorcentaje()+nl);
+					
 					fWriter.close();
 				} catch (Exception e) {
 					e.printStackTrace();
