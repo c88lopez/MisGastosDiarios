@@ -23,7 +23,11 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
+<<<<<<< HEAD
+		if ((new CategoriaData(this)).getList().isEmpty()) 
+=======
 		//if (CategoriaData.getList().isEmpty()) 
+>>>>>>> 1636920d7ef4112486b1bc6f7991436c73e4ac92
 			FileManager.importarCategorias(this);
 		
 		try {
