@@ -2,6 +2,7 @@ package ar.edu.ort.t5.grp1.data;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -46,10 +47,11 @@ public class FileManager {
 	}
 
 	public static void exportarReporte(Context context , List<Reporte> lista) {
+		File file = new File(context.getFilesDir(), "reporte.txt");
 		for( Reporte i : lista){
 			FileOutputStream fos;
 			try {
-				fos = new FileOutputStream("reporte.txt", true);
+				fos = new FileOutputStream(file);
 	
 				FileWriter fWriter;
 	
